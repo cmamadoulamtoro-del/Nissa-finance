@@ -3,292 +3,239 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nissa Finance — Finance ton ambition</title>
+<title>NISSA FINANCE</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #f7f9fc;
-  color: #172033;
-  line-height: 1.6;
+body{
+  font-family:Arial,sans-serif;
+  background:#f5f8f7;
+  color:#172033;
+  line-height:1.6;
 }
 
-header {
-  background: white;
-  padding: 18px 7%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+header{
+  background:#0b172a;
+  color:white;
+  padding:18px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:10;
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #0b6b57;
+.logo{
+  font-size:24px;
+  font-weight:bold;
+  color:#19b37a;
 }
 
-nav a {
-  margin-left: 18px;
-  text-decoration: none;
-  color: #172033;
-  font-weight: 600;
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:18px;
+  font-size:14px;
 }
 
-.hero {
-  padding: 80px 7%;
-  text-align: center;
-  background: linear-gradient(135deg, #e9f8f3, #ffffff);
+.hero{
+  background:linear-gradient(135deg,#071426,#0b6b57);
+  color:white;
+  text-align:center;
+  padding:85px 7%;
 }
 
-.hero h1 {
-  font-size: 48px;
-  color: #0b6b57;
-  margin-bottom: 15px;
+.hero h1{
+  font-size:48px;
+  margin-bottom:15px;
+  letter-spacing:2px;
 }
 
-.hero p {
-  max-width: 700px;
-  margin: auto;
-  font-size: 18px;
+.hero p{
+  max-width:700px;
+  margin:auto;
+  font-size:18px;
 }
 
-.btn {
-  display: inline-block;
-  margin-top: 25px;
-  padding: 14px 24px;
-  background: #0b6b57;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: none;
+.btn{
+  border:none;
+  background:#19b37a;
+  color:white;
+  padding:14px 22px;
+  border-radius:9px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:22px;
+  font-size:16px;
 }
 
-.btn:hover {
-  background: #084d40;
+.btn:hover{
+  opacity:.9;
 }
 
-section {
-  padding: 65px 7%;
+.btn-secondary{
+  background:#536071;
 }
 
-.section-title {
-  text-align: center;
-  margin-bottom: 35px;
+section{
+  padding:60px 7%;
 }
 
-.section-title h2 {
-  color: #0b6b57;
-  font-size: 32px;
+.title{
+  text-align:center;
+  margin-bottom:35px;
 }
 
-.solutions {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+.title h2{
+  color:#0b6b57;
+  font-size:32px;
 }
 
-.card {
-  background: white;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
 }
 
-.card .icon {
-  font-size: 35px;
-  margin-bottom: 10px;
+.card{
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
 }
 
-.card h3 {
-  margin-bottom: 10px;
-  color: #0b6b57;
+.card h3{
+  color:#0b6b57;
+  margin:10px 0;
 }
 
-.steps {
-  max-width: 850px;
-  margin: auto;
+.icon{
+  font-size:35px;
 }
 
-.step {
-  background: white;
-  padding: 20px;
-  margin-bottom: 15px;
-  border-left: 5px solid #0b6b57;
-  border-radius: 8px;
+.app{
+  background:#eaf7f2;
 }
 
-.demo {
-  background: #e9f8f3;
+.box{
+  max-width:650px;
+  margin:auto;
+  background:white;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 5px 25px rgba(0,0,0,.08);
 }
 
-.form-container {
-  max-width: 650px;
-  margin: auto;
-  background: white;
-  padding: 30px;
-  border-radius: 18px;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+.form{
+  display:none;
 }
 
-.form-step {
-  display: none;
+.form.active{
+  display:block;
 }
 
-.form-step.active {
-  display: block;
+label{
+  display:block;
+  margin-top:15px;
+  margin-bottom:6px;
+  font-weight:bold;
 }
 
-.form-step h3 {
-  color: #0b6b57;
-  margin-bottom: 20px;
+input,select{
+  width:100%;
+  padding:13px;
+  border:1px solid #ccd5df;
+  border-radius:8px;
+  font-size:16px;
 }
 
-label {
-  display: block;
-  margin-top: 15px;
-  margin-bottom: 6px;
-  font-weight: bold;
+.dashboard{
+  display:none;
+  max-width:900px;
+  margin:auto;
 }
 
-input, select {
-  width: 100%;
-  padding: 13px;
-  border: 1px solid #ccd5df;
-  border-radius: 8px;
-  font-size: 16px;
+.dashboard.active{
+  display:block;
 }
 
-.buttons {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 25px;
+.welcome{
+  background:#0b172a;
+  color:white;
+  padding:30px;
+  border-radius:18px;
+  margin-bottom:20px;
 }
 
-.buttons .btn {
-  margin-top: 0;
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
 }
 
-.btn-secondary {
-  background: #687386;
+.stat{
+  background:white;
+  padding:22px;
+  border-radius:14px;
+  text-align:center;
+  box-shadow:0 5px 20px rgba(0,0,0,.05);
 }
 
-.progress {
-  height: 8px;
-  background: #dde5e2;
-  border-radius: 10px;
-  margin-bottom: 25px;
-  overflow: hidden;
+.stat strong{
+  display:block;
+  color:#0b6b57;
+  font-size:25px;
 }
 
-.progress-bar {
-  height: 100%;
-  width: 25%;
-  background: #0b6b57;
-  transition: 0.3s;
+.profile{
+  background:white;
+  padding:25px;
+  border-radius:14px;
+  margin-top:20px;
 }
 
-.result {
-  display: none;
-  max-width: 750px;
-  margin: auto;
+.profile p{
+  margin:8px 0;
 }
 
-.result-box {
-  background: white;
-  padding: 30px;
-  border-radius: 18px;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-  text-align: center;
+footer{
+  background:#0b172a;
+  color:white;
+  text-align:center;
+  padding:30px;
 }
 
-.score {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  margin: 20px auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #e9f8f3;
-  color: #0b6b57;
-  font-size: 38px;
-  font-weight: bold;
-}
+@media(max-width:800px){
 
-.metrics {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  margin-top: 25px;
-}
-
-.metric {
-  background: #f7f9fc;
-  padding: 18px;
-  border-radius: 10px;
-}
-
-.metric strong {
-  display: block;
-  font-size: 22px;
-  color: #0b6b57;
-}
-
-.recommendations {
-  text-align: left;
-  margin-top: 25px;
-}
-
-.recommendations li {
-  margin: 10px 0;
-}
-
-footer {
-  background: #172033;
-  color: white;
-  text-align: center;
-  padding: 30px;
-}
-
-@media (max-width: 800px) {
-  header {
-    flex-direction: column;
-    gap: 10px;
+  header{
+    flex-direction:column;
+    gap:10px;
   }
 
-  nav a {
-    margin: 0 6px;
-    font-size: 14px;
+  nav a{
+    margin:0 5px;
   }
 
-  .hero h1 {
-    font-size: 36px;
+  .hero h1{
+    font-size:36px;
   }
 
-  .solutions {
-    grid-template-columns: 1fr;
+  .cards{
+    grid-template-columns:1fr;
   }
 
-  .metrics {
-    grid-template-columns: 1fr;
+  .stats{
+    grid-template-columns:1fr;
   }
 
-  section {
-    padding: 50px 5%;
+  section{
+    padding:45px 5%;
   }
 }
 </style>
@@ -297,663 +244,531 @@ footer {
 <body>
 
 <header>
-  <div class="logo">Nissa Finance</div>
 
-  <nav>
-    <a href="#accueil">Accueil</a>
-    <a href="#solutions">Solutions</a>
-    <a href="#comment">Comment ça marche</a>
-    <a href="#demo">Tester</a>
-  </nav>
+<div class="logo">NISSA FINANCE</div>
+
+<nav>
+<a href="#accueil">Accueil</a>
+<a href="#solutions">Solutions</a>
+<a href="#application">Application</a>
+</nav>
+
 </header>
+
 
 <section class="hero" id="accueil">
 
-  <h1>Finance ton ambition.</h1>
+<h1>FINANCE TON AMBITION.</h1>
 
-  <p>
-    Nissa Finance est un outil financier numérique qui aide les femmes
-    entrepreneures à mieux gérer leur entreprise, construire leur profil
-    financier et se préparer à rechercher des financements.
-  </p>
+<p>
+Nissa Finance aide les femmes entrepreneures à mieux gérer leur activité,
+construire leur profil financier et se préparer au financement.
+</p>
 
-  <a href="#demo" class="btn">
-    Découvrir Nissa Finance
-  </a>
+<button class="btn" onclick="showRegistration()">
+👩‍💼 Créer mon profil
+</button>
 
 </section>
+
 
 <section id="solutions">
 
-  <div class="section-title">
-    <h2>Nos solutions</h2>
-    <p>Des outils simples pour transformer tes données en opportunités.</p>
-  </div>
+<div class="title">
 
-  <div class="solutions">
+<h2>Nos solutions</h2>
 
-    <div class="card">
-      <div class="icon">📊</div>
-      <h3>Gestion financière</h3>
-      <p>
-        Suis tes revenus, dépenses et performances pour mieux piloter ton activité.
-      </p>
-    </div>
+<p>
+Des outils simples pour transformer tes données en opportunités.
+</p>
 
-    <div class="card">
-      <div class="icon">💼</div>
-      <h3>Profil financier</h3>
-      <p>
-        Construis progressivement un profil financier clair et professionnel.
-      </p>
-    </div>
+</div>
 
-    <div class="card">
-      <div class="icon">🚀</div>
-      <h3>Préparation au financement</h3>
-      <p>
-        Prépare les informations essentielles avant de rechercher un financement.
-      </p>
-    </div>
 
-    <div class="card">
-      <div class="icon">📈</div>
-      <h3>Suivi de croissance</h3>
-      <p>
-        Identifie tes progrès et les points à améliorer pour développer ton entreprise.
-      </p>
-    </div>
+<div class="cards">
 
-  </div>
+<div class="card">
 
-</section>
+<div class="icon">📊</div>
 
-<section id="comment">
+<h3>Gestion financière</h3>
 
-  <div class="section-title">
-    <h2>Comment ça marche ?</h2>
-  </div>
+<p>
+Suis tes revenus et tes dépenses pour mieux piloter ton activité.
+</p>
 
-  <div class="steps">
+</div>
 
-    <div class="step">
-      <strong>1. Crée ton profil</strong>
-      <p>Renseigne les informations essentielles de ton activité.</p>
-    </div>
 
-    <div class="step">
-      <strong>2. Enregistre tes données</strong>
-      <p>Ajoute progressivement tes revenus, dépenses et informations financières.</p>
-    </div>
+<div class="card">
 
-    <div class="step">
-      <strong>3. Analyse ta situation</strong>
-      <p>Visualise les indicateurs qui t'aident à mieux comprendre ton entreprise.</p>
-    </div>
+<div class="icon">💼</div>
 
-    <div class="step">
-      <strong>4. Prépare ton financement</strong>
-      <p>Utilise ton profil pour mieux préparer tes démarches auprès des financeurs.</p>
-    </div>
+<h3>Profil financier</h3>
 
-  </div>
+<p>
+Construis progressivement un profil financier clair et professionnel.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">🚀</div>
+
+<h3>Préparation au financement</h3>
+
+<p>
+Prépare les informations essentielles avant de rechercher un financement.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">📈</div>
+
+<h3>Suivi de croissance</h3>
+
+<p>
+Identifie tes progrès et les points à améliorer.
+</p>
+
+</div>
+
+</div>
 
 </section>
 
-<section class="demo" id="demo">
 
-  <div class="section-title">
-    <h2>🚀 Tester Nissa Finance</h2>
-    <p>
-      Fais une simulation rapide de ton profil financier.
-    </p>
-  </div>
+<section class="app" id="application">
 
-  <div class="form-container">
+<div class="title">
 
-    <div class="progress">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
+<h2>Application Nissa Finance</h2>
 
-    <form id="financeForm">
+<p>
+Crée ton profil entrepreneure pour accéder à ton espace personnel.
+</p>
 
-      <!-- ÉTAPE 1 -->
+</div>
 
-      <div class="form-step active" id="step1">
 
-        <h3>👩‍💼 Ton activité</h3>
+<div class="box">
 
-        <label>Nom de ton entreprise</label>
 
-        <input
-          type="text"
-          id="businessName"
-          placeholder="Ex : Boutique Amina"
-          required
-        >
+<!-- INSCRIPTION -->
 
-        <label>Secteur d'activité</label>
+<div class="form active" id="registration">
 
-        <select id="sector" required>
-          <option value="">Choisir</option>
-          <option>Commerce</option>
-          <option>Agriculture</option>
-          <option>Élevage</option>
-          <option>Services</option>
-          <option>Artisanat</option>
-          <option>Restauration</option>
-          <option>Mode / Beauté</option>
-          <option>Technologie</option>
-          <option>Autre</option>
-        </select>
+<h2>👩‍💼 Créer mon profil</h2>
 
-        <label>Depuis combien de temps ton activité existe-t-elle ?</label>
+<label>Nom complet</label>
 
-        <select id="age" required>
-          <option value="">Choisir</option>
-          <option value="1">Moins de 1 an</option>
-          <option value="2">1 à 2 ans</option>
-          <option value="3">3 à 5 ans</option>
-          <option value="4">Plus de 5 ans</option>
-        </select>
+<input
+type="text"
+id="name"
+placeholder="Ex : Aïssata Mohamed"
+>
 
-        <div class="buttons">
-          <button type="button" class="btn" onclick="nextStep(2)">
-            Suivant →
-          </button>
-        </div>
 
-      </div>
+<label>Nom de l'entreprise</label>
 
-      <!-- ÉTAPE 2 -->
+<input
+type="text"
+id="business"
+placeholder="Ex : Boutique Aïssata"
+>
 
-      <div class="form-step" id="step2">
 
-        <h3>💰 Situation financière</h3>
+<label>Numéro de téléphone</label>
 
-        <label>Revenus mensuels (FCFA)</label>
+<input
+type="tel"
+id="phone"
+placeholder="Ex : 22 XX XX XX"
+>
 
-        <input
-          type="number"
-          id="revenue"
-          placeholder="Ex : 500000"
-          required
-        >
 
-        <label>Dépenses mensuelles (FCFA)</label>
+<label>Ville</label>
 
-        <input
-          type="number"
-          id="expenses"
-          placeholder="Ex : 300000"
-          required
-        >
+<input
+type="text"
+id="city"
+placeholder="Ex : Nouakchott"
+>
 
-        <label>Épargne disponible (FCFA)</label>
 
-        <input
-          type="number"
-          id="savings"
-          placeholder="Ex : 100000"
-          required
-        >
+<label>Secteur d'activité</label>
 
-        <label>Dettes actuelles (FCFA)</label>
+<select id="sector">
 
-        <input
-          type="number"
-          id="debt"
-          placeholder="Ex : 50000"
-          required
-        >
+<option value="">Choisir</option>
 
-        <div class="buttons">
+<option>Commerce</option>
+<option>Agriculture</option>
+<option>Élevage</option>
+<option>Artisanat</option>
+<option>Restauration</option>
+<option>Mode / Beauté</option>
+<option>Services</option>
+<option>Technologie</option>
+<option>Autre</option>
 
-          <button
-            type="button"
-            class="btn btn-secondary"
-            onclick="nextStep(1)"
-          >
-            ← Retour
-          </button>
+</select>
 
-          <button
-            type="button"
-            class="btn"
-            onclick="nextStep(3)"
-          >
-            Suivant →
-          </button>
 
-        </div>
+<label>Depuis combien de temps l'activité existe-t-elle ?</label>
 
-      </div>
+<select id="experience">
 
-      <!-- ÉTAPE 3 -->
+<option value="">Choisir</option>
+<option>Moins de 1 an</option>
+<option>1 à 2 ans</option>
+<option>3 à 5 ans</option>
+<option>Plus de 5 ans</option>
 
-      <div class="form-step" id="step3">
+</select>
 
-        <h3>🎯 Ton objectif</h3>
 
-        <label>Quel est ton principal objectif ?</label>
+<label>Quel est ton principal objectif ?</label>
 
-        <select id="goal" required>
+<select id="goal">
 
-          <option value="">Choisir</option>
+<option value="">Choisir</option>
+<option>Développer mon activité</option>
+<option>Augmenter mon stock</option>
+<option>Acheter du matériel</option>
+<option>Rechercher un financement</option>
 
-          <option value="develop">
-            Développer mon activité
-          </option>
+</select>
 
-          <option value="equipment">
-            Acheter du matériel
-          </option>
 
-          <option value="stock">
-            Augmenter mon stock
-          </option>
+<button class="btn" onclick="saveProfile()">
+💾 Enregistrer mon profil
+</button>
 
-          <option value="finance">
-            Rechercher un financement
-          </option>
+</div>
 
-        </select>
 
-        <label>Montant de financement souhaité (FCFA)</label>
+<!-- TABLEAU DE BORD -->
 
-        <input
-          type="number"
-          id="funding"
-          placeholder="Ex : 1000000"
-          required
-        >
+<div class="dashboard" id="dashboard">
 
-        <div class="buttons">
+<div class="welcome">
 
-          <button
-            type="button"
-            class="btn btn-secondary"
-            onclick="nextStep(2)"
-          >
-            ← Retour
-          </button>
+<h2>
+Bonjour <span id="dashName"></span> 👋
+</h2>
 
-          <button
-            type="button"
-            class="btn"
-            onclick="analyze()"
-          >
-            🔍 Analyser
-          </button>
+<p>
+Bienvenue dans ton espace Nissa Finance.
+</p>
 
-        </div>
+</div>
 
-      </div>
 
-    </form>
+<div class="stats">
 
-  </div>
+<div class="stat">
+
+<strong>0 FCFA</strong>
+
+Revenus
+
+</div>
+
+
+<div class="stat">
+
+<strong>0 FCFA</strong>
+
+Dépenses
+
+</div>
+
+
+<div class="stat">
+
+<strong>0 FCFA</strong>
+
+Solde
+
+</div>
+
+</div>
+
+
+<div class="profile">
+
+<h3>💼 Mon profil financier</h3>
+
+<p>
+<strong>Entreprise :</strong>
+<span id="dashBusiness"></span>
+</p>
+
+<p>
+<strong>Secteur :</strong>
+<span id="dashSector"></span>
+</p>
+
+<p>
+<strong>Ville :</strong>
+<span id="dashCity"></span>
+</p>
+
+<p>
+<strong>Téléphone :</strong>
+<span id="dashPhone"></span>
+</p>
+
+<p>
+<strong>Ancienneté :</strong>
+<span id="dashExperience"></span>
+</p>
+
+<p>
+<strong>Objectif :</strong>
+<span id="dashGoal"></span>
+</p>
+
+
+<button class="btn btn-secondary" onclick="editProfile()">
+✏️ Modifier mon profil
+</button>
+
+
+<button class="btn" onclick="logout()">
+🚪 Quitter mon espace
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
-<section class="result" id="result">
-
-  <div class="result-box">
-
-    <h2>📊 Ton analyse financière</h2>
-
-    <p id="welcome"></p>
-
-    <div class="score" id="score">
-      0/100
-    </div>
-
-    <h3 id="level"></h3>
-
-    <div class="metrics">
-
-      <div class="metric">
-        <strong id="monthlyBalance">0</strong>
-        Solde mensuel
-      </div>
-
-      <div class="metric">
-        <strong id="savingRate">0%</strong>
-        Taux d'épargne
-      </div>
-
-      <div class="metric">
-        <strong id="fundingLevel">0%</strong>
-        Préparation financement
-      </div>
-
-    </div>
-
-    <div class="recommendations">
-
-      <h3>💡 Recommandations</h3>
-
-      <ul id="recommendationList"></ul>
-
-    </div>
-
-    <button class="btn" onclick="restart()">
-      🔄 Faire une nouvelle simulation
-    </button>
-
-  </div>
-
-</section>
-
-<section>
-
-  <div class="section-title">
-
-    <h2>Ton entreprise mérite de grandir.</h2>
-
-    <p>
-      Avec Nissa Finance, transforme une meilleure gestion financière
-      en nouvelles opportunités.
-    </p>
-
-  </div>
-
-</section>
 
 <footer>
 
-  <p>© 2026 Nissa Finance — Prototype</p>
+<p>
+© 2026 NISSA FINANCE — Prototype
+</p>
 
 </footer>
 
+
 <script>
 
-let currentStep = 1;
-
-function nextStep(step) {
-
-  document
-    .querySelectorAll(".form-step")
-    .forEach(el => el.classList.remove("active"));
-
-  document
-    .getElementById("step" + step)
-    .classList.add("active");
-
-  currentStep = step;
-
-  document.getElementById("progressBar").style.width =
-    (step * 33.33) + "%";
-
-  document.getElementById("demo").scrollIntoView({
-    behavior: "smooth"
-  });
-}
-
-
-function analyze() {
-
-  const businessName =
-    document.getElementById("businessName").value;
-
-  const revenue =
-    Number(document.getElementById("revenue").value);
-
-  const expenses =
-    Number(document.getElementById("expenses").value);
-
-  const savings =
-    Number(document.getElementById("savings").value);
-
-  const debt =
-    Number(document.getElementById("debt").value);
-
-  const age =
-    Number(document.getElementById("age").value);
-
-  const funding =
-    Number(document.getElementById("funding").value);
-
-  if (
-    !businessName ||
-    !revenue ||
-    !expenses ||
-    savings < 0 ||
-    debt < 0 ||
-    !age ||
-    !funding
-  ) {
-
-    alert("Merci de remplir toutes les informations.");
-
-    return;
-  }
-
-  const balance = revenue - expenses;
-
-  let score = 50;
-
-  // Rentabilité
-
-  if (balance > 0) {
-    score += 15;
-  } else {
-    score -= 15;
-  }
-
-  // Épargne
-
-  const savingRate =
-    revenue > 0
-      ? (savings / revenue) * 100
-      : 0;
-
-  if (savingRate >= 20) {
-    score += 15;
-  } else if (savingRate >= 10) {
-    score += 8;
-  } else {
-    score -= 5;
-  }
-
-  // Ancienneté
-
-  score += age * 3;
-
-  // Dette
-
-  if (revenue > 0) {
-
-    const debtRatio =
-      debt / revenue;
-
-    if (debtRatio > 0.5) {
-      score -= 10;
-    } else if (debtRatio < 0.2) {
-      score += 5;
-    }
-
-  }
-
-  // Limiter le score
-
-  score =
-    Math.max(
-      0,
-      Math.min(100, Math.round(score))
-    );
-
-  // Préparation financement
-
-  let fundingLevel =
-    score;
-
-  if (funding > revenue * 12) {
-    fundingLevel -= 10;
-  }
-
-  fundingLevel =
-    Math.max(
-      0,
-      Math.min(100, Math.round(fundingLevel))
-    );
-
-  // Niveau
-
-  let level = "";
-
-  if (score >= 80) {
-
-    level =
-      "🟢 Profil financier solide";
-
-  } else if (score >= 60) {
-
-    level =
-      "🟠 Profil financier en développement";
-
-  } else {
-
-    level =
-      "🔴 Profil financier à renforcer";
-
-  }
-
-  document.getElementById("welcome").innerHTML =
-    "Voici l'analyse de <strong>" +
-    businessName +
-    "</strong>.";
-
-  document.getElementById("score").innerText =
-    score + "/100";
-
-  document.getElementById("level").innerText =
-    level;
-
-  document.getElementById("monthlyBalance").innerText =
-    balance.toLocaleString("fr-FR") +
-    " FCFA";
-
-  document.getElementById("savingRate").innerText =
-    Math.round(savingRate) + "%";
-
-  document.getElementById("fundingLevel").innerText =
-    fundingLevel + "%";
-
-  // Recommandations
-
-  const list =
-    document.getElementById("recommendationList");
-
-  list.innerHTML = "";
-
-  if (balance <= 0) {
-
-    addRecommendation(
-      "Réduire ou mieux contrôler les dépenses afin d'améliorer le solde mensuel."
-    );
-
-  } else {
-
-    addRecommendation(
-      "Maintenir une bonne maîtrise des dépenses et suivre régulièrement les revenus."
-    );
-
-  }
-
-  if (savingRate < 10) {
-
-    addRecommendation(
-      "Mettre en place une épargne régulière pour renforcer la capacité financière."
-    );
-
-  } else {
-
-    addRecommendation(
-      "Continuer à renforcer l'épargne de précaution."
-    );
-
-  }
-
-  if (debt > revenue * 0.3) {
-
-    addRecommendation(
-      "Réduire progressivement le niveau d'endettement avant une nouvelle demande de financement."
-    );
-
-  }
-
-  if (funding > revenue * 12) {
-
-    addRecommendation(
-      "Préparer un plan financier détaillé pour justifier le montant de financement souhaité."
-    );
-
-  } else {
-
-    addRecommendation(
-      "Commencer à préparer les documents financiers nécessaires pour un éventuel financement."
-    );
-
-  }
-
-  if (score < 60) {
-
-    addRecommendation(
-      "Priorité : améliorer la gestion financière avant de rechercher un financement important."
-    );
-
-  } else if (score >= 80) {
-
-    addRecommendation(
-      "Ton profil est bien structuré : tu peux maintenant approfondir la préparation de ton dossier de financement."
-    );
-
-  }
-
-  document.querySelector(".form-container").style.display =
-    "none";
-
-  document.getElementById("result").style.display =
-    "block";
-
-  document.getElementById("result").scrollIntoView({
-    behavior: "smooth"
-  });
+/* AFFICHER L'INSCRIPTION */
+
+function showRegistration(){
+
+document
+.getElementById("application")
+.scrollIntoView({
+behavior:"smooth"
+});
 
 }
 
 
-function addRecommendation(text) {
+/* ENREGISTRER LE PROFIL */
 
-  const li =
-    document.createElement("li");
+function saveProfile(){
 
-  li.innerText =
-    "✅ " + text;
+const name =
+document.getElementById("name").value.trim();
 
-  document
-    .getElementById("recommendationList")
-    .appendChild(li);
+const business =
+document.getElementById("business").value.trim();
+
+const phone =
+document.getElementById("phone").value.trim();
+
+const city =
+document.getElementById("city").value.trim();
+
+const sector =
+document.getElementById("sector").value;
+
+const experience =
+document.getElementById("experience").value;
+
+const goal =
+document.getElementById("goal").value;
+
+
+if(
+!name ||
+!business ||
+!phone ||
+!city ||
+!sector ||
+!experience ||
+!goal
+){
+
+alert(
+"Merci de remplir toutes les informations."
+);
+
+return;
 
 }
 
 
-function restart() {
+const profile={
 
-  document.getElementById("financeForm").reset();
+name:name,
 
-  document.querySelector(".form-container").style.display =
-    "block";
+business:business,
 
-  document.getElementById("result").style.display =
-    "none";
+phone:phone,
 
-  nextStep(1);
+city:city,
+
+sector:sector,
+
+experience:experience,
+
+goal:goal
+
+};
+
+
+localStorage.setItem(
+"nissaProfile",
+JSON.stringify(profile)
+);
+
+
+showDashboard();
 
 }
+
+
+/* AFFICHER LE TABLEAU DE BORD */
+
+function showDashboard(){
+
+const data =
+JSON.parse(
+localStorage.getItem("nissaProfile")
+);
+
+
+if(!data){
+
+return;
+
+}
+
+
+document.getElementById("dashName")
+.innerText=data.name;
+
+document.getElementById("dashBusiness")
+.innerText=data.business;
+
+document.getElementById("dashPhone")
+.innerText=data.phone;
+
+document.getElementById("dashCity")
+.innerText=data.city;
+
+document.getElementById("dashSector")
+.innerText=data.sector;
+
+document.getElementById("dashExperience")
+.innerText=data.experience;
+
+document.getElementById("dashGoal")
+.innerText=data.goal;
+
+
+document.getElementById("registration")
+.classList.remove("active");
+
+
+document.getElementById("dashboard")
+.classList.add("active");
+
+
+document.getElementById("application")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* MODIFIER LE PROFIL */
+
+function editProfile(){
+
+const data =
+JSON.parse(
+localStorage.getItem("nissaProfile")
+);
+
+
+document.getElementById("name").value=data.name;
+
+document.getElementById("business").value=data.business;
+
+document.getElementById("phone").value=data.phone;
+
+document.getElementById("city").value=data.city;
+
+document.getElementById("sector").value=data.sector;
+
+document.getElementById("experience").value=data.experience;
+
+document.getElementById("goal").value=data.goal;
+
+
+document.getElementById("dashboard")
+.classList.remove("active");
+
+
+document.getElementById("registration")
+.classList.add("active");
+
+}
+
+
+/* QUITTER L'ESPACE */
+
+function logout(){
+
+localStorage.removeItem("nissaProfile");
+
+location.reload();
+
+}
+
+
+/* CHARGER LE PROFIL AU DEMARRAGE */
+
+window.onload=function(){
+
+if(
+localStorage.getItem("nissaProfile")
+){
+
+showDashboard();
+
+}
+
+};
 
 </script>
 
 </body>
-            </html>
+</html>
