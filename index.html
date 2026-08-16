@@ -83,6 +83,13 @@ nav a{
   background:#536071;
 }
 
+.btn-danger{
+  background:#c0392b;
+  padding:8px 12px;
+  margin-top:0;
+  font-size:13px;
+}
+
 section{
   padding:60px 7%;
 }
@@ -124,7 +131,7 @@ section{
 }
 
 .box{
-  max-width:650px;
+  max-width:900px;
   margin:auto;
   background:white;
   padding:30px;
@@ -147,12 +154,17 @@ label{
   font-weight:bold;
 }
 
-input,select{
+input,select,textarea{
   width:100%;
   padding:13px;
   border:1px solid #ccd5df;
   border-radius:8px;
   font-size:16px;
+}
+
+textarea{
+  min-height:90px;
+  resize:vertical;
 }
 
 .dashboard{
@@ -193,6 +205,19 @@ input,select{
   font-size:25px;
 }
 
+.financial-box{
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  margin-top:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+
+.financial-box h3{
+  color:#0b6b57;
+  margin-bottom:15px;
+}
+
 .profile{
   background:white;
   padding:25px;
@@ -202,6 +227,52 @@ input,select{
 
 .profile p{
   margin:8px 0;
+}
+
+.operations{
+  margin-top:20px;
+}
+
+.operation{
+  background:#f7f9f8;
+  border-left:5px solid #19b37a;
+  padding:15px;
+  border-radius:10px;
+  margin-top:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.operation.expense{
+  border-left-color:#c0392b;
+}
+
+.operation-info{
+  flex:1;
+}
+
+.income{
+  color:#0b8f62;
+  font-weight:bold;
+}
+
+.expense-text{
+  color:#c0392b;
+  font-weight:bold;
+}
+
+.analysis{
+  background:#eaf7f2;
+  padding:20px;
+  border-radius:14px;
+  margin-top:20px;
+}
+
+.analysis h3{
+  color:#0b6b57;
+  margin-bottom:10px;
 }
 
 footer{
@@ -236,6 +307,10 @@ footer{
 
   section{
     padding:45px 5%;
+  }
+
+  .operation{
+    align-items:flex-start;
   }
 }
 </style>
@@ -288,54 +363,35 @@ Des outils simples pour transformer tes données en opportunités.
 <div class="cards">
 
 <div class="card">
-
 <div class="icon">📊</div>
-
 <h3>Gestion financière</h3>
-
 <p>
 Suis tes revenus et tes dépenses pour mieux piloter ton activité.
 </p>
-
 </div>
 
-
 <div class="card">
-
 <div class="icon">💼</div>
-
 <h3>Profil financier</h3>
-
 <p>
 Construis progressivement un profil financier clair et professionnel.
 </p>
-
 </div>
 
-
 <div class="card">
-
 <div class="icon">🚀</div>
-
 <h3>Préparation au financement</h3>
-
 <p>
 Prépare les informations essentielles avant de rechercher un financement.
 </p>
-
 </div>
 
-
 <div class="card">
-
 <div class="icon">📈</div>
-
 <h3>Suivi de croissance</h3>
-
 <p>
 Identifie tes progrès et les points à améliorer.
 </p>
-
 </div>
 
 </div>
@@ -373,7 +429,6 @@ id="name"
 placeholder="Ex : Aïssata Mohamed"
 >
 
-
 <label>Nom de l'entreprise</label>
 
 <input
@@ -381,7 +436,6 @@ type="text"
 id="business"
 placeholder="Ex : Boutique Aïssata"
 >
-
 
 <label>Numéro de téléphone</label>
 
@@ -391,7 +445,6 @@ id="phone"
 placeholder="Ex : 22 XX XX XX"
 >
 
-
 <label>Ville</label>
 
 <input
@@ -400,13 +453,11 @@ id="city"
 placeholder="Ex : Nouakchott"
 >
 
-
 <label>Secteur d'activité</label>
 
 <select id="sector">
 
 <option value="">Choisir</option>
-
 <option>Commerce</option>
 <option>Agriculture</option>
 <option>Élevage</option>
@@ -418,7 +469,6 @@ placeholder="Ex : Nouakchott"
 <option>Autre</option>
 
 </select>
-
 
 <label>Depuis combien de temps l'activité existe-t-elle ?</label>
 
@@ -432,7 +482,6 @@ placeholder="Ex : Nouakchott"
 
 </select>
 
-
 <label>Quel est ton principal objectif ?</label>
 
 <select id="goal">
@@ -444,7 +493,6 @@ placeholder="Ex : Nouakchott"
 <option>Rechercher un financement</option>
 
 </select>
-
 
 <button class="btn" onclick="saveProfile()">
 💾 Enregistrer mon profil
@@ -470,11 +518,13 @@ Bienvenue dans ton espace Nissa Finance.
 </div>
 
 
+<!-- STATISTIQUES -->
+
 <div class="stats">
 
 <div class="stat">
 
-<strong>0 FCFA</strong>
+<strong id="totalIncome">0 MRU</strong>
 
 Revenus
 
@@ -483,7 +533,7 @@ Revenus
 
 <div class="stat">
 
-<strong>0 FCFA</strong>
+<strong id="totalExpense">0 MRU</strong>
 
 Dépenses
 
@@ -492,7 +542,7 @@ Dépenses
 
 <div class="stat">
 
-<strong>0 FCFA</strong>
+<strong id="balance">0 MRU</strong>
 
 Solde
 
@@ -500,6 +550,110 @@ Solde
 
 </div>
 
+
+<!-- AJOUT OPERATION -->
+
+<div class="financial-box">
+
+<h3>💳 Ajouter une opération</h3>
+
+<label>Type d'opération</label>
+
+<select id="operationType">
+
+<option value="income">🟢 Revenu</option>
+<option value="expense">🔴 Dépense</option>
+
+</select>
+
+
+<label>Montant (MRU)</label>
+
+<input
+type="number"
+id="operationAmount"
+placeholder="Ex : 50000"
+min="0"
+>
+
+
+<label>Catégorie</label>
+
+<select id="operationCategory">
+
+<option value="">Choisir</option>
+
+<option>Vente</option>
+<option>Achat de stock</option>
+<option>Transport</option>
+<option>Loyer</option>
+<option>Salaires</option>
+<option>Équipement</option>
+<option>Marketing</option>
+<option>Autre</option>
+
+</select>
+
+
+<label>Date</label>
+
+<input
+type="date"
+id="operationDate"
+>
+
+
+<label>Description</label>
+
+<textarea
+id="operationDescription"
+placeholder="Ex : Vente de produits..."
+></textarea>
+
+
+<button class="btn" onclick="addOperation()">
+➕ Enregistrer l'opération
+</button>
+
+</div>
+
+
+<!-- ANALYSE -->
+
+<div class="analysis">
+
+<h3>📈 Analyse rapide</h3>
+
+<p>
+Taux d'épargne :
+<strong id="savingRate">0%</strong>
+</p>
+
+<p id="financialMessage">
+Ajoute tes premières opérations pour commencer ton analyse.
+</p>
+
+</div>
+
+
+<!-- HISTORIQUE -->
+
+<div class="financial-box operations">
+
+<h3>📋 Historique des opérations</h3>
+
+<div id="operationsList">
+
+<p>
+Aucune opération enregistrée pour le moment.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- PROFIL -->
 
 <div class="profile">
 
@@ -541,8 +695,8 @@ Solde
 </button>
 
 
-<button class="btn" onclick="logout()">
-🚪 Quitter mon espace
+<button class="btn btn-secondary" onclick="logout()">
+🚪 Se déconnecter
 </button>
 
 </div>
@@ -626,17 +780,11 @@ return;
 const profile={
 
 name:name,
-
 business:business,
-
 phone:phone,
-
 city:city,
-
 sector:sector,
-
 experience:experience,
-
 goal:goal
 
 };
@@ -700,10 +848,363 @@ document.getElementById("dashboard")
 .classList.add("active");
 
 
+loadOperations();
+
 document.getElementById("application")
 .scrollIntoView({
 behavior:"smooth"
 });
+
+}
+
+
+/* AJOUTER UNE OPERATION */
+
+function addOperation(){
+
+const type =
+document.getElementById("operationType").value;
+
+const amount =
+parseFloat(
+document.getElementById("operationAmount").value
+);
+
+const category =
+document.getElementById("operationCategory").value;
+
+const date =
+document.getElementById("operationDate").value;
+
+const description =
+document.getElementById("operationDescription").value.trim();
+
+
+if(
+!amount ||
+amount <= 0 ||
+!category ||
+!date
+){
+
+alert(
+"Merci de renseigner le montant, la catégorie et la date."
+);
+
+return;
+
+}
+
+
+const operation={
+
+id:Date.now(),
+
+type:type,
+
+amount:amount,
+
+category:category,
+
+date:date,
+
+description:description
+
+};
+
+
+let operations =
+JSON.parse(
+localStorage.getItem("nissaOperations")
+) || [];
+
+
+operations.push(operation);
+
+
+localStorage.setItem(
+"nissaOperations",
+JSON.stringify(operations)
+);
+
+
+/* Vider le formulaire */
+
+document.getElementById("operationAmount").value="";
+
+document.getElementById("operationCategory").value="";
+
+document.getElementById("operationDescription").value="";
+
+
+loadOperations();
+
+}
+
+
+/* CHARGER LES OPERATIONS */
+
+function loadOperations(){
+
+let operations =
+JSON.parse(
+localStorage.getItem("nissaOperations")
+) || [];
+
+
+let totalIncome=0;
+
+let totalExpense=0;
+
+
+operations.forEach(function(operation){
+
+if(operation.type==="income"){
+
+totalIncome += operation.amount;
+
+}else{
+
+totalExpense += operation.amount;
+
+}
+
+});
+
+
+const balance =
+totalIncome-totalExpense;
+
+
+document.getElementById("totalIncome")
+.innerText =
+formatMoney(totalIncome);
+
+document.getElementById("totalExpense")
+.innerText =
+formatMoney(totalExpense);
+
+document.getElementById("balance")
+.innerText =
+formatMoney(balance);
+
+
+/* TAUX D'EPARGNE */
+
+let savingRate=0;
+
+if(totalIncome>0){
+
+savingRate =
+((balance/totalIncome)*100);
+
+}
+
+
+document.getElementById("savingRate")
+.innerText =
+savingRate.toFixed(1)+"%";
+
+
+/* MESSAGE FINANCIER */
+
+let message="";
+
+if(totalIncome===0){
+
+message=
+"Ajoute tes premiers revenus pour commencer ton analyse.";
+
+}else if(balance<0){
+
+message=
+"⚠️ Tes dépenses dépassent tes revenus. Surveille ton équilibre financier.";
+
+}else if(savingRate<10){
+
+message=
+"Ton solde est positif, mais ta capacité d'épargne reste faible.";
+
+}else if(savingRate<20){
+
+message=
+"Bonne progression. Tu commences à construire une capacité d'épargne.";
+
+}else{
+
+message=
+"Excellente capacité d'épargne. Ton profil financier progresse bien.";
+
+}
+
+
+document.getElementById("financialMessage")
+.innerText=message;
+
+
+/* HISTORIQUE */
+
+const list =
+document.getElementById("operationsList");
+
+
+if(operations.length===0){
+
+list.innerHTML=
+"<p>Aucune opération enregistrée pour le moment.</p>";
+
+return;
+
+}
+
+
+operations.sort(function(a,b){
+
+return b.id-a.id;
+
+});
+
+
+list.innerHTML="";
+
+
+operations.forEach(function(operation){
+
+const div =
+document.createElement("div");
+
+div.className =
+"operation "+
+(operation.type==="expense" ? "expense" : "");
+
+
+const sign =
+operation.type==="income" ? "+" : "-";
+
+const amountClass =
+operation.type==="income"
+? "income"
+: "expense-text";
+
+
+div.innerHTML=`
+
+<div class="operation-info">
+
+<strong>${operation.category}</strong>
+
+<br>
+
+<small>${formatDate(operation.date)}</small>
+
+<br>
+
+${operation.description
+? "<small>"+escapeHtml(operation.description)+"</small>"
+: ""}
+
+<br>
+
+<span class="${amountClass}">
+${sign} ${formatMoney(operation.amount)}
+</span>
+
+</div>
+
+<button
+class="btn btn-danger"
+onclick="deleteOperation(${operation.id})"
+>
+🗑️
+</button>
+
+`;
+
+
+list.appendChild(div);
+
+});
+
+}
+
+
+/* SUPPRIMER UNE OPERATION */
+
+function deleteOperation(id){
+
+if(
+!confirm("Supprimer cette opération ?")
+){
+
+return;
+
+}
+
+
+let operations =
+JSON.parse(
+localStorage.getItem("nissaOperations")
+) || [];
+
+
+operations =
+operations.filter(function(operation){
+
+return operation.id!==id;
+
+});
+
+
+localStorage.setItem(
+"nissaOperations",
+JSON.stringify(operations)
+);
+
+
+loadOperations();
+
+}
+
+
+/* FORMATAGE MONETAIRE */
+
+function formatMoney(amount){
+
+return new Intl.NumberFormat(
+"fr-FR"
+).format(amount)+" MRU";
+
+}
+
+
+/* FORMATAGE DATE */
+
+function formatDate(date){
+
+const parts =
+date.split("-");
+
+if(parts.length!==3){
+
+return date;
+
+}
+
+return parts[2]+"/"+parts[1]+"/"+parts[0];
+
+}
+
+
+/* PROTECTION DU TEXTE */
+
+function escapeHtml(text){
+
+const div =
+document.createElement("div");
+
+div.textContent=text;
+
+return div.innerHTML;
 
 }
 
@@ -716,6 +1217,13 @@ const data =
 JSON.parse(
 localStorage.getItem("nissaProfile")
 );
+
+
+if(!data){
+
+return;
+
+}
 
 
 document.getElementById("name").value=data.name;
@@ -743,20 +1251,61 @@ document.getElementById("registration")
 }
 
 
-/* QUITTER L'ESPACE */
+/* DECONNEXION */
 
 function logout(){
 
-localStorage.removeItem("nissaProfile");
+document
+.getElementById("dashboard")
+.classList.remove("active");
 
-location.reload();
+document
+.getElementById("registration")
+.classList.add("active");
+
+document
+.getElementById("application")
+.scrollIntoView({
+behavior:"smooth"
+});
 
 }
 
 
-/* CHARGER LE PROFIL AU DEMARRAGE */
+/* DATE DU JOUR PAR DEFAUT */
 
-window.onload=function(){
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+const dateInput =
+document.getElementById("operationDate");
+
+if(dateInput){
+
+const today =
+new Date();
+
+const year =
+today.getFullYear();
+
+const month =
+String(
+today.getMonth()+1
+).padStart(2,"0");
+
+const day =
+String(
+today.getDate()
+).padStart(2,"0");
+
+dateInput.value =
+year+"-"+month+"-"+day;
+
+}
+
+
+/* CHARGER LE PROFIL */
 
 if(
 localStorage.getItem("nissaProfile")
@@ -766,7 +1315,7 @@ showDashboard();
 
 }
 
-};
+});
 
 </script>
 
