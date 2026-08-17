@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NISSA FINANCE V4</title>
+
+<style>
+:root{
+    --bleu:#062b49;
+    --vert:#0b8f68;
+    --or:#d9a441;
+    --fond:#f4f7f9;
+    --blanc:#ffffff;
+    --texte:#183042;
+    --gris:#6b7b86;
+    --rouge:#c94b4b;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:var(--fond);
+    color:var(--texte);
+}
+
+header{
+    background:var(--bleu);
+    color:white;
+    padding:25px 20px;
+    text-align:center;
+}
+
+header h1{
+    margin:0;
+    font-size:28px;
+}
+
+header p{
+    margin:8px 0 0;
+    opacity:.9;
+}
+
+nav{
+    background:white;
+    display:flex;
+    gap:8px;
+    padding:10px;
+    overflow-x:auto;
+    position:sticky;
+    top:0;
+    z-index:10;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+nav button{
+    border:0;
+    padding:11px 15px;
+    border-radius:9px;
+    background:#edf2f5;
+    color:var(--bleu);
+    font-weight:bold;
+    white-space:nowrap;
+    cursor:pointer;
+}
+
+nav button.active{
+    background:var(--vert);
+    color:white;
+}
+
+main{
+    width:min(1100px,94%);
+    margin:20px auto;
+}
+
+section{
+    display:none;
+}
+
+section.active{
+    display:block;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    margin-bottom:18px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+}
+
+h2{
+    color:var(--bleu);
+    margin-top:0;
+}
+
+h3{
+    color:var(--vert);
+}
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.stat{
+    background:#eef6f3;
+    border-radius:12px;
+    padding:18px;
+}
+
+.stat span{
+    display:block;
+    color:var(--gris);
+    font-size:14px;
+}
+
+.stat strong{
+    display:block;
+    font-size:24px;
+    margin-top:7px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:6px;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccd6dc;
+    border-radius:9px;
+    font-size:16px;
+    background:white;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+button.primary{
+    background:var(--vert);
+    color:white;
+    border:0;
+    padding:13px 18px;
+    border-radius:9px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+button.gold{
+    background:var(--or);
+    color:#17202a;
+    border:0;
+    padding:13px 18px;
+    border-radius:9px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+button.danger{
+    background:var(--rouge);
+    color:white;
+    border:0;
+    padding:7px 10px;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+.message{
+    margin-top:12px;
+    color:var(--vert);
+    font-weight:bold;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    padding:10px;
+    border-bottom:1px solid #e3e8eb;
+    text-align:left;
+}
+
+.empty{
+    text-align:center;
+    padding:25px;
+    color:var(--gris);
+}
+
+.score-box{
+    text-align:center;
+}
+
+.score-number{
+    font-size:65px;
+    font-weight:bold;
+    color:var(--vert);
+}
+
+.progress{
+    height:16px;
+    background:#e3e8eb;
+    border-radius:20px;
+    overflow:hidden;
+    margin:20px 0;
+}
+
+.progress-bar{
+    height:100%;
+    width:0;
+    background:var(--vert);
+    transition:.4s;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+    background:#e8f4ef;
+    color:var(--vert);
+    font-weight:bold;
+}
+
+footer{
+    text-align:center;
+    color:var(--gris);
+    padding:30px 15px;
+}
+
+@media(max-width:800px){
+
+    .dashboard-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:23px;
+    }
+
+    main{
+        width:96%;
+    }
+
+    .card{
+        padding:15px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .stat{
+        padding:13px;
+    }
+
+    .stat strong{
+        font-size:19px;
+    }
+
+    table{
+        font-size:13px;
+    }
+
+    th,
+    td{
+        padding:7px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>NISSA FINANCE V4</h1>
+
+<p>
+Gérez votre activité • Suivez vos finances • Préparez votre financement
+</p>
+
+</header>
+
+<nav>
+
+<button class="active" onclick="ouvrir('dashboard',this)">
+📊 Tableau de bord
+</button>
+
+<button onclick="ouvrir('profil',this)">
+👤 Profil
+</button>
+
+<button onclick="ouvrir('revenus',this)">
+💰 Revenus
+</button>
+
+<button onclick="ouvrir('depenses',this)">
+💸 Dépenses
+</button>
+
+<button onclick="ouvrir('score',this)">
+📈 Score NISSA
+</button>
+
+</nav>
+
+<main>
+
+<!-- TABLEAU DE BORD -->
+
+<section id="dashboard" class="active">
+
+<div class="card">
+
+<h2>Tableau de bord</h2>
+
+<div class="dashboard-grid">
+
+<div class="stat">
+<span>💰 Revenus</span>
+<strong id="totalRevenus">0 MRU</strong>
+</div>
+
+<div class="stat">
+<span>💸 Dépenses</span>
+<strong id="totalDepenses">0 MRU</strong>
+</div>
+
+<div class="stat">
+<span>🧮 Solde</span>
+<strong id="solde">0 MRU</strong>
+</div>
+
+<div class="stat">
+<span>📋 Opérations</span>
+<strong id="nombreOperations">0</strong>
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>👤 Mon activité</h3>
+
+<p id="resumeProfil">
+Votre profil n'est pas encore renseigné.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- PROFIL -->
+
+<section id="profil">
+
+<div class="card">
+
+<h2>👤 Profil de l'entrepreneur</h2>
+
+<div class="form-grid">
+
+<div>
+<label>Nom et prénom</label>
+<input id="nom" type="text">
+</div>
+
+<div>
+<label>Nom de l'activité</label>
+<input id="activite" type="text">
+</div>
+
+<div>
+<label>Secteur d'activité</label>
+<input id="secteur" type="text"
+placeholder="Commerce, agriculture, services...">
+</div>
+
+<div>
+<label>Téléphone</label>
+<input id="telephone" type="tel">
+</div>
+
+<div>
+<label>Ville</label>
+<input id="ville" type="text">
+</div>
+
+<div>
+<label>Ancienneté</label>
+
+<select id="anciennete">
+
+<option value="">Choisir</option>
+<option>Moins de 6 mois</option>
+<option>6 à 12 mois</option>
+<option>1 à 3 ans</option>
+<option>Plus de 3 ans</option>
+
+</select>
+
+</div>
+
+</div>
+
+<button class="primary" onclick="enregistrerProfil()">
+💾 Enregistrer le profil
+</button>
+
+<div id="messageProfil" class="message"></div>
+
+</div>
+
+</section>
+
+
+<!-- REVENUS -->
+
+<section id="revenus">
+
+<div class="card">
+
+<h2>💰 Ajouter un revenu</h2>
+
+<div class="form-grid">
+
+<div>
+
+<label>Montant en MRU</label>
+
+<input id="revenuMontant"
+type="number"
+min="0"
+placeholder="Ex : 5000">
+
+</div>
+
+<div>
+
+<label>Catégorie</label>
+
+<select id="revenuCategorie">
+
+<option>Vente</option>
+<option>Prestation</option>
+<option>Service</option>
+<option>Autre</option>
+
+</select>
+
+</div>
+
+</div>
+
+<label style="margin-top:15px;">
+Description
+</label>
+
+<input
+id="revenuDescription"
+type="text"
+placeholder="Description du revenu">
+
+<button class="primary" onclick="ajouterRevenu()">
+➕ Enregistrer le revenu
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>📋 Historique des revenus</h2>
+
+<div id="listeRevenus"></div>
+
+</div>
+
+</section>
+
+
+<!-- DEPENSES -->
+
+<section id="depenses">
+
+<div class="card">
+
+<h2>💸 Ajouter une dépense</h2>
+
+<div class="form-grid">
+
+<div>
+
+<label>Montant en MRU</label>
+
+<input id="depenseMontant"
+type="number"
+min="0"
+placeholder="Ex : 1000">
+
+</div>
+
+<div>
+
+<label>Catégorie</label>
+
+<select id="depenseCategorie">
+
+<option>Achats</option>
+<option>Transport</option>
+<option>Salaires</option>
+<option>Loyer</option>
+<option>Marketing</option>
+<option>Électricité</option>
+<option>Autre</option>
+
+</select>
+
+</div>
+
+</div>
+
+<label style="margin-top:15px;">
+Description
+</label>
+
+<input
+id="depenseDescription"
+type="text"
+placeholder="Description de la dépense">
+
+<button class="primary" onclick="ajouterDepense()">
+➕ Enregistrer la dépense
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>📋 Historique des dépenses</h2>
+
+<div id="listeDepenses"></div>
+
+</div>
+
+</section>
+
+
+<!-- SCORE NISSA -->
+
+<section id="score">
+
+<div class="card score-box">
+
+<h2>📈 SCORE NISSA</h2>
+
+<div class="score-number" id="scoreNissa">
+0/100
+</div>
+
+<div class="progress">
+
+<div
+class="progress-bar"
+id="barreScore">
+</div>
+
+</div>
+
+<h3 id="niveauScore">
+À compléter
+</h3>
+
+<p>
+Votre score est un indicateur de préparation financière.
+Il ne constitue pas une décision automatique d'octroi de financement.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>Indicateurs</h2>
+
+<p>
+Profil complet :
+<span id="indProfil" class="badge">Non</span>
+</p>
+
+<p>
+Revenus enregistrés :
+<span id="indRevenus" class="badge">Non</span>
+</p>
+
+<p>
+Dépenses enregistrées :
+<span id="indDepenses" class="badge">Non</span>
+</p>
+
+<p>
+Suivi financier :
+<span id="indSuivi" class="badge">Non</span>
+</p>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+NISSA FINANCE V4<br>
+Votre activité. Vos données. Votre avenir financier.
+
+</footer>
+
+
+<script>
+
+/* =========================
+   DONNÉES
+========================= */
+
+const CLE =
+"nissa_finance_v4";
+
+let donnees =
+JSON.parse(
+localStorage.getItem(CLE)
+||
+'{"profil":{},"revenus":[],"depenses":[]}'
+);
+
+
+/* =========================
+   SAUVEGARDE
+========================= */
+
+function sauvegarder(){
+
+localStorage.setItem(
+CLE,
+JSON.stringify(donnees)
+);
+
+actualiser();
+
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function ouvrir(id,bouton){
+
+document
+.querySelectorAll("section")
+.forEach(section=>{
+section.classList.remove("active");
+});
+
+document
+.getElementById(id)
+.classList.add("active");
+
+document
+.querySelectorAll("nav button")
+.forEach(btn=>{
+btn.classList.remove("active");
+});
+
+bouton.classList.add("active");
+
+actualiser();
+
+}
+
+
+/* =========================
+   FORMAT ARGENT
+========================= */
+
+function argent(nombre){
+
+return Number(nombre || 0)
+.toLocaleString("fr-FR")
++
+" MRU";
+
+}
+
+
+/* =========================
+   PROFIL
+========================= */
+
+function enregistrerProfil(){
+
+donnees.profil={
+
+nom:
+document.getElementById("nom").value.trim(),
+
+activite:
+document.getElementById("activite").value.trim(),
+
+secteur:
+document.getElementById("secteur").value.trim(),
+
+telephone:
+document.getElementById("telephone").value.trim(),
+
+ville:
+document.getElementById("ville").value.trim(),
+
+anciennete:
+document.getElementById("anciennete").value
+
+};
+
+sauvegarder();
+
+document.getElementById(
+"messageProfil"
+).textContent =
+"✅ Profil enregistré avec succès.";
+
+}
+
+
+/* =========================
+   REVENUS
+========================= */
+
+function ajouterRevenu(){
+
+let montant =
+Number(
+document.getElementById(
+"revenuMontant"
+).value
+);
+
+if(!montant || montant<=0){
+
+alert(
+"Veuillez saisir un montant valide."
+);
+
+return;
+
+}
+
+donnees.revenus.push({
+
+id:Date.now(),
+
+montant:montant,
+
+categorie:
+document.getElementById(
+"revenuCategorie"
+).value,
+
+description:
+document.getElementById(
+"revenuDescription"
+).value.trim(),
+
+date:
+new Date().toLocaleDateString(
+"fr-FR"
+)
+
+});
+
+document.getElementById(
+"revenuMontant"
+).value="";
+
+document.getElementById(
+"revenuDescription"
+).value="";
+
+sauvegarder();
+
+}
+
+
+/* =========================
+   DEPENSES
+========================= */
+
+function ajouterDepense(){
+
+let montant =
+Number(
+document.getElementById(
+"depenseMontant"
+).value
+);
+
+if(!montant || montant<=0){
+
+alert(
+"Veuillez saisir un montant valide."
+);
+
+return;
+
+}
+
+donnees.depenses.push({
+
+id:Date.now(),
+
+montant:montant,
+
+categorie:
+document.getElementById(
+"depenseCategorie"
+).value,
+
+description:
+document.getElementById(
+"depenseDescription"
+).value.trim(),
+
+date:
+new Date().toLocaleDateString(
+"fr-FR"
+)
+
+});
+
+document.getElementById(
+"depenseMontant"
+).value="";
+
+document.getElementById(
+"depenseDescription"
+).value="";
+
+sauvegarder();
+
+}
+
+
+/* =========================
+   SUPPRESSION
+========================= */
+
+function supprimerRevenu(id){
+
+donnees.revenus =
+donnees.revenus.filter(
+r=>r.id!==id
+);
+
+sauvegarder();
+
+}
+
+
+function supprimerDepense(id){
+
+donnees.depenses =
+donnees.depenses.filter(
+d=>d.id!==id
+);
+
+sauvegarder();
+
+}
+
+
+/* =========================
+   HISTORIQUE
+========================= */
+
+function afficherRevenus(){
+
+let element =
+document.getElementById(
+"listeRevenus"
+);
+
+if(!donnees.revenus.length){
+
+element.innerHTML =
+'<div class="empty">Aucun revenu enregistré.</div>';
+
+return;
+
+}
+
+element.innerHTML = `
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+<th>Catégorie</th>
+<th>Description</th>
+<th>Montant</th>
+<th></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${
+donnees.revenus
+.slice()
+.reverse()
+.map(r=>`
+
+<tr>
+
+<td>${r.date}</td>
+
+<td>${r.categorie}</td>
+
+<td>${r.description || "-"}</td>
+
+<td>${argent(r.montant)}</td>
+
+<td>
+
+<button
+class="danger"
+onclick="supprimerRevenu(${r.id})">
+
+×
+</button>
+
+</td>
+
+</tr>
+
+`)
+.join("")
+}
+
+</tbody>
+
+</table>
+
+`;
+
+}
+
+
+function afficherDepenses(){
+
+let element =
+document.getElementById(
+"listeDepenses"
+);
+
+if(!donnees.depenses.length){
+
+element.innerHTML =
+'<div class="empty">Aucune dépense enregistrée.</div>';
+
+return;
+
+}
+
+element.innerHTML = `
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+<th>Catégorie</th>
+<th>Description</th>
+<th>Montant</th>
+<th></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${
+donnees.depenses
+.slice()
+.reverse()
+.map(d=>`
+
+<tr>
+
+<td>${d.date}</td>
+
+<td>${d.categorie}</td>
+
+<td>${d.description || "-"}</td>
+
+<td>${argent(d.montant)}</td>
+
+<td>
+
+<button
+class="danger"
+onclick="supprimerDepense(${d.id})">
+
+×
+</button>
+
+</td>
+
+</tr>
+
+`)
+.join("")
+}
+
+</tbody>
+
+</table>
+
+`;
+
+}
+
+
+/* =========================
+   SCORE NISSA
+========================= */
+
+function calculerScore(){
+
+let p =
+donnees.profil;
+
+let champs=[
+
+p.nom,
+p.activite,
+p.secteur,
+p.telephone,
+p.ville,
+p.anciennete
+
+];
+
+let remplis =
+champs.filter(Boolean).length;
+
+let score=0;
+
+
+/* Profil : 50 points */
+
+score +=
+Math.round(
+(remplis/6)*50
+);
+
+
+/* Revenus */
+
+if(donnees.revenus.length>0){
+
+score+=15;
+
+}
+
+
+/* Dépenses */
+
+if(donnees.depenses.length>0){
+
+score+=15;
+
+}
+
+
+/* Suivi */
+
+if(
+donnees.revenus.length>0 &&
+donnees.depenses.length>0
+){
+
+score+=10;
+
+}
+
+
+/* Activité */
+
+if(
+p.activite &&
+p.secteur
+){
+
+score+=10;
+
+}
+
+
+score =
+Math.min(100,score);
+
+
+document.getElementById(
+"scoreNissa"
+).textContent =
+score+"/100";
+
+
+document.getElementById(
+"barreScore"
+).style.width =
+score+"%";
+
+
+let niveau="À compléter";
+
+if(score>=40)
+niveau="En progression";
+
+if(score>=70)
+niveau="Bonne préparation";
+
+if(score>=85)
+niveau="Très bonne préparation";
+
+
+document.getElementById(
+"niveauScore"
+).textContent =
+niveau;
+
+
+/* Indicateurs */
+
+document.getElementById(
+"indProfil"
+).textContent =
+remplis===6
+?"Oui"
+:"En cours";
+
+
+document.getElementById(
+"indRevenus"
+).textContent =
+donnees.revenus.length
+?"Oui"
+:"Non";
+
+
+document.getElementById(
+"indDepenses"
+).textContent =
+donnees.depenses.length
+?"Oui"
+:"Non";
+
+
+document.getElementById(
+"indSuivi"
+).textContent =
+(
+donnees.revenus.length &&
+donnees.depenses.length
+)
+?"Oui"
+:"En cours";
+
+}
+
+
+/* =========================
+   ACTUALISATION
+========================= */
+
+function actualiser(){
+
+let totalRevenus =
+donnees.revenus.reduce(
+(total,r)=>
+total+Number(r.montant),
+0
+);
+
+let totalDepenses =
+donnees.depenses.reduce(
+(total,d)=>
+total+Number(d.montant),
+0
+);
+
+let solde =
+totalRevenus-totalDepenses;
+
+
+document.getElementById(
+"totalRevenus"
+).textContent =
+argent(totalRevenus);
+
+
+document.getElementById(
+"totalDepenses"
+).textContent =
+argent(totalDepenses);
+
+
+document.getElementById(
+"solde"
+).textContent =
+argent(solde);
+
+
+document.getElementById(
+"nombreOperations"
+).textContent =
+donnees.revenus.length+
+donnees.depenses.length;
+
+
+/* Profil */
+
+let p=donnees.profil;
+
+if(p.nom || p.activite){
+
+document.getElementById(
+"resumeProfil"
+).textContent =
+(
+p.nom || ""
+)
++
+(
+p.activite
+?
+" — "+p.activite
+:""
+)
++
+(
+p.secteur
+?
+" — "+p.secteur
+:""
+);
+
+}else{
+
+document.getElementById(
+"resumeProfil"
+).textContent =
+"Votre profil n'est pas encore renseigné.";
+
+}
+
+
+/* Remplir formulaire */
+
+document.getElementById("nom").value =
+p.nom || "";
+
+document.getElementById("activite").value =
+p.activite || "";
+
+document.getElementById("secteur").value =
+p.secteur || "";
+
+document.getElementById("telephone").value =
+p.telephone || "";
+
+document.getElementById("ville").value =
+p.ville || "";
+
+document.getElementById("anciennete").value =
+p.anciennete || "";
+
+
+afficherRevenus();
+
+afficherDepenses();
+
+calculerScore();
+
+}
+
+
+/* =========================
+   DÉMARRAGE
+========================= */
+
+actualiser();
+
+</script>
+
+</body>
+</html>
