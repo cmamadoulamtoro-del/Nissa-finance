@@ -2160,6 +2160,194 @@ document.addEventListener(
 
     }
 );
+  /* =================================
+   RAPPORT FINANCIER NISSA V5
+================================= */
+
+function generateFinancialReport(){
+
+    const operations =
+        JSON.parse(
+            localStorage.getItem("nissaOperations")
+        ) || [];
+
+    const profile =
+        JSON.parse(
+            localStorage.getItem("nissaProfile")
+        ) || {};
+
+    let totalIncome = 0;
+    let totalExpense = 0;
+
+    operations.forEach(function(operation){
+
+        const amount =
+            Number(operation.amount) || 0;
+
+        if(operation.type === "income"){
+
+            totalIncome += amount;
+
+        }else{
+
+            totalExpense += amount;
+
+        }
+
+    });
+
+    const balance =
+        totalIncome - totalExpense;
+
+    let savingRate = 0;
+
+    if(totalIncome > 0){
+
+        savingRate =
+            (balance / totalIncome) * 100;
+
+    }
+
+    savingRate =
+        Math.max(
+            0,
+            Math.min(
+                savingRate,
+                100
+            )
+        );
+
+    const scoreElement =
+        document.getElementById("nissaScore");
+
+    const score =
+        scoreElement
+        ? scoreElement.innerText
+        : "0/100";
+
+
+    const goal =
+        JSON.parse(
+            localStorage.getItem(
+                "nissaFinancialGoal"
+            )
+        ) || null;
+
+
+    let goalText =
+        "Aucun objectif financier enregistré.";
+
+
+    if(goal){
+
+        const target =
+            Number(goal.target) || 0;
+
+        let progress = 0;
+
+        if(target > 0){
+
+            progress =
+                (balance / target) * 100;
+
+        }
+
+        progress =
+            Math.max(
+                0,
+                Math.min(
+                    progress,
+                    100
+                )
+            );
+
+        goalText =
+            goal.name +
+            " — " +
+            formatMoney(target) +
+            " — Progression : " +
+            progress.toFixed(0) +
+            "%";
+
+    }
+
+
+    const reportContent =
+        document.getElementById(
+            "reportContent"
+        );
+
+
+    reportContent.innerHTML = `
+
+        <p>
+        👤 <strong>Entrepreneure :</strong>
+        ${profile.name || "Non renseigné"}
+        </p>
+
+        <p>
+        🏢 <strong>Entreprise :</strong>
+        ${profile.business || "Non renseignée"}
+        </p>
+
+        <p>
+        📍 <strong>Ville :</strong>
+        ${profile.city || "Non renseignée"}
+        </p>
+
+        <p>
+        💰 <strong>Revenus :</strong>
+        ${formatMoney(totalIncome)}
+        </p>
+
+        <p>
+        💸 <strong>Dépenses :</strong>
+        ${formatMoney(totalExpense)}
+        </p>
+
+        <p>
+        🧮 <strong>Solde :</strong>
+        ${formatMoney(balance)}
+        </p>
+
+        <p>
+        📈 <strong>Taux d'épargne :</strong>
+        ${savingRate.toFixed(1)}%
+        </p>
+
+        <p>
+        ⭐ <strong>Score NISSA :</strong>
+        ${score}
+        </p>
+
+        <p>
+        🎯 <strong>Objectif :</strong>
+        ${goalText}
+        </p>
+
+        <hr>
+
+        <p>
+        📋 <strong>Nombre d'opérations :</strong>
+        ${operations.length}
+        </p>
+
+        <p>
+        <strong>Conclusion :</strong>
+        ${balance >= 0
+            ? "La situation financière présente un solde positif."
+            : "Les dépenses dépassent actuellement les revenus."
+        }
+        </p>
+
+    `;
+
+
+    document.getElementById(
+        "financialReport"
+    ).style.display = "block";
+
+  }
 </script>
 
 </body>
