@@ -1019,7 +1019,173 @@ savingRate =
 document.getElementById("savingRate")
 .innerText =
 savingRate.toFixed(1)+"%";
+/* SCORE NISSA */
 
+let score = 0;
+
+
+/* 👤 PROFIL — 20 POINTS */
+
+const profileFields = [
+    "name",
+    "business",
+    "phone",
+    "city",
+    "sector",
+    "experience",
+    "goal"
+];
+
+let profileCompleted = 0;
+
+profileFields.forEach(function(field){
+
+    const element =
+        document.getElementById(field);
+
+    if(element && element.value.trim()){
+        profileCompleted++;
+    }
+
+});
+
+const profileScore =
+Math.round(
+(profileCompleted / profileFields.length) * 20
+);
+
+score += profileScore;
+
+
+/* 💰 REVENUS — 20 POINTS */
+
+const revenueScore =
+totalIncome > 0 ? 20 : 0;
+
+score += revenueScore;
+
+
+/* 💸 DÉPENSES — 20 POINTS */
+
+const expenseScore =
+totalExpense > 0 ? 20 : 0;
+
+score += expenseScore;
+
+
+/* 📋 HISTORIQUE — 20 POINTS */
+
+const historyScore =
+operations.length >= 5
+? 20
+: Math.round(
+(operations.length / 5) * 20
+);
+
+score += historyScore;
+
+
+/* 🧮 ÉQUILIBRE FINANCIER — 20 POINTS */
+
+let balanceScore = 0;
+
+if(totalIncome > 0 && balance > 0){
+
+    if(savingRate >= 20){
+
+        balanceScore = 20;
+
+    }else if(savingRate >= 10){
+
+        balanceScore = 15;
+
+    }else{
+
+        balanceScore = 10;
+
+    }
+
+}
+
+score += balanceScore;
+
+
+/* 📈 AFFICHER LE SCORE */
+
+const scoreElement =
+document.getElementById("nissaScore");
+
+const scoreBar =
+document.getElementById("nissaScoreBar");
+
+if(scoreElement){
+
+    scoreElement.innerText =
+    score + "/100";
+
+}
+
+if(scoreBar){
+
+    scoreBar.style.width =
+    score + "%";
+
+}
+
+
+/* 🟢 NIVEAU DU SCORE */
+
+const levelElement =
+document.getElementById("nissaLevel");
+
+if(levelElement){
+
+    if(score >= 80){
+
+        levelElement.innerText =
+        "🟢 Très bonne préparation financière.";
+
+    }else if(score >= 60){
+
+        levelElement.innerText =
+        "🟢 Bonne préparation financière.";
+
+    }else if(score >= 40){
+
+        levelElement.innerText =
+        "🟡 Profil en progression.";
+
+    }else{
+
+        levelElement.innerText =
+        "🟠 Profil à renforcer.";
+
+    }
+
+}
+
+
+/* 📊 DÉTAIL DES POINTS */
+
+document.getElementById("scoreProfile")
+.innerText =
+profileScore + "/20";
+
+document.getElementById("scoreRevenue")
+.innerText =
+revenueScore + "/20";
+
+document.getElementById("scoreExpense")
+.innerText =
+expenseScore + "/20";
+
+document.getElementById("scoreHistory")
+.innerText =
+historyScore + "/20";
+
+document.getElementById("scoreBalance")
+.innerText =
+balanceScore + "/20";
 
 /* MESSAGE FINANCIER */
 
@@ -1317,6 +1483,7 @@ today.getDate()
 dateInput.value =
 year+"-"+month+"-"+day;
 
+  
 }
 
 
