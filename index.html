@@ -719,7 +719,72 @@ pour calculer ton score.
 </div>
 
 </div>
+<!-- OBJECTIF FINANCIER -->
 
+<div class="financial-box financial-goal">
+
+<h3>🎯 Mon objectif financier</h3>
+
+<label>
+Objectif
+</label>
+
+<input
+type="text"
+id="goalName"
+placeholder="Ex : Acheter du matériel">
+
+<label>
+Montant cible (MRU)
+</label>
+
+<input
+type="number"
+id="goalAmount"
+placeholder="Ex : 100000">
+
+<button
+type="button"
+onclick="saveFinancialGoal()">
+🎯 Enregistrer mon objectif
+</button>
+
+<div
+id="goalProgress"
+class="goal-progress"
+style="display:none;">
+
+<p>
+<strong id="goalTitle"></strong>
+</p>
+
+<p>
+Épargne actuelle :
+<strong id="goalCurrent">0 MRU</strong>
+</p>
+
+<p>
+Objectif :
+<strong id="goalTarget">0 MRU</strong>
+</p>
+
+<div class="progress-container">
+
+<div
+id="goalProgressBar"
+class="progress-bar">
+</div>
+
+</div>
+
+<p>
+Progression :
+<strong id="goalPercent">0%</strong>
+</p>
+
+</div>
+
+</div>
 <!-- HISTORIQUE -->
 
 <div class="financial-box operations">
@@ -1907,6 +1972,191 @@ document.addEventListener(
     function(){
 
         updateFinancialCharts();
+
+    }
+);/* =================================
+   OBJECTIF FINANCIER V5
+================================= */
+
+function saveFinancialGoal(){
+
+    const name =
+        document.getElementById("goalName").value.trim();
+
+    const target =
+        Number(
+            document.getElementById("goalAmount").value
+        ) || 0;
+
+    if(!name || target <= 0){
+
+        alert(
+            "Veuillez saisir un objectif et un montant valide."
+        );
+
+        return;
+    }
+
+    const goal = {
+
+        name: name,
+
+        target: target
+
+    };
+
+    localStorage.setItem(
+        "nissaFinancialGoal",
+        JSON.stringify(goal)
+    );
+
+    updateFinancialGoal();
+
+}
+
+
+/* ================================
+   AFFICHER L'OBJECTIF
+================================ */
+
+function updateFinancialGoal(){
+
+    const savedGoal =
+        JSON.parse(
+            localStorage.getItem(
+                "nissaFinancialGoal"
+            )
+        );
+
+    if(!savedGoal){
+
+        return;
+
+    }
+
+
+    const operations =
+        JSON.parse(
+            localStorage.getItem(
+                "nissaOperations"
+            )
+        ) || [];
+
+
+    let income = 0;
+
+    let expense = 0;
+
+
+    operations.forEach(
+        function(operation){
+
+            const amount =
+                Number(operation.amount) || 0;
+
+
+            if(operation.type === "income"){
+
+                income += amount;
+
+            }else{
+
+                expense += amount;
+
+            }
+
+        }
+    );
+
+
+    const savings =
+        income - expense;
+
+
+    const target =
+        Number(savedGoal.target) || 0;
+
+
+    let percentage = 0;
+
+
+    if(target > 0){
+
+        percentage =
+            (savings / target) * 100;
+
+    }
+
+
+    percentage =
+        Math.max(
+            0,
+            Math.min(
+                percentage,
+                100
+            )
+        );
+
+
+    document.getElementById(
+        "goalTitle"
+    ).innerText =
+        savedGoal.name;
+
+
+    document.getElementById(
+        "goalCurrent"
+    ).innerText =
+        formatMoney(savings);
+
+
+    document.getElementById(
+        "goalTarget"
+    ).innerText =
+        formatMoney(target);
+
+
+    document.getElementById(
+        "goalPercent"
+    ).innerText =
+        percentage.toFixed(0) + "%";
+
+
+    document.getElementById(
+        "goalProgressBar"
+    ).style.width =
+        percentage + "%";
+
+
+    document.getElementById(
+        "goalProgress"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "goalName"
+    ).value =
+        savedGoal.name;
+
+
+    document.getElementById(
+        "goalAmount"
+    ).value =
+        savedGoal.target;
+
+}
+
+
+/* ================================
+   CHARGER L'OBJECTIF
+================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        updateFinancialGoal();
 
     }
 );
