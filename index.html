@@ -691,7 +691,38 @@ pour calculer ton score.
 </div>
 
 </div>
+</div>
 
+<!-- V5 — TABLEAU DE BORD FINANCIER -->
+
+<div class="financial-box financial-dashboard">
+
+<h3>📊 Tableau de bord financier</h3>
+
+<div class="charts-container">
+
+<div class="chart-card">
+<h4>💰 Revenus</h4>
+<canvas id="incomeChart"></canvas>
+</div>
+
+<div class="chart-card">
+<h4>💸 Dépenses</h4>
+<canvas id="expenseChart"></canvas>
+</div>
+
+</div>
+
+<div class="chart-card balance-chart">
+<h4>🧮 Évolution du solde</h4>
+<canvas id="balanceChart"></canvas>
+</div>
+
+</div>
+
+<!-- HISTORIQUE -->
+
+<div class="financial-box operations">
 <!-- HISTORIQUE -->
 
 <div class="financial-box operations">
@@ -1553,7 +1584,332 @@ showDashboard();
 }
 
 });
+/* ================================
+   V5 — GRAPHIQUES FINANCIERS
+================================ */
 
+function updateFinancialCharts(){
+
+    const operations =
+        JSON.parse(
+            localStorage.getItem("nissaOperations")
+        ) || [];
+
+    const incomeCanvas =
+        document.getElementById("incomeChart");
+
+    const expenseCanvas =
+        document.getElementById("expenseChart");
+
+    const balanceCanvas =
+        document.getElementById("balanceChart");
+
+    if(
+        !incomeCanvas ||
+        !expenseCanvas ||
+        !balanceCanvas
+    ){
+        return;
+    }
+
+
+    /* Préparer les données */
+
+    const dates = [];
+
+    const incomes = [];
+
+    const expenses = [];
+
+    const balances = [];
+
+    let balance = 0;
+
+
+    operations
+    .slice()
+    .sort(function(a,b){
+
+        return new Date(a.date) -
+               new Date(b.date);
+
+    })
+    .forEach(function(operation){
+
+        const date =
+            operation.date;
+
+        const amount =
+            Number(operation.amount) || 0;
+
+
+        if(!dates.includes(date)){
+
+            dates.push(date);
+
+            incomes.push(0);
+
+            expenses.push(0);
+
+            balances.push(balance);
+
+        }
+
+
+        const index =
+            dates.indexOf(date);
+
+
+        if(operation.type === "income"){
+
+            incomes[index] += amount;
+
+            balance += amount;
+
+        }else{
+
+            expenses[index] += amount;
+
+            balance -= amount;
+
+        }
+
+
+        balances[index] = balance;
+
+    });
+
+
+    /* ================================
+       GRAPHIQUE REVENUS
+    ================================= */
+
+    drawFinancialChart(
+        incomeCanvas,
+        dates,
+        incomes,
+        "Revenus"
+    );
+
+
+    /* ================================
+       GRAPHIQUE DÉPENSES
+    ================================= */
+
+    drawFinancialChart(
+        expenseCanvas,
+        dates,
+        expenses,
+        "Dépenses"
+    );
+
+
+    /* ================================
+       GRAPHIQUE SOLDE
+    ================================= */
+
+    drawFinancialChart(
+        balanceCanvas,
+        dates,
+        balances,
+        "Solde"
+    );
+
+}
+
+
+/* ================================
+   MOTEUR DU GRAPHIQUE
+================================ */
+
+function drawFinancialChart(
+    canvas,
+    labels,
+    values,
+    title
+){
+
+    const ctx =
+        canvas.getContext("2d");
+
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    if(values.length === 0){
+
+        ctx.font = "16px Arial";
+
+        ctx.textAlign = "center";
+
+        ctx.fillText(
+            "Aucune donnée disponible",
+            canvas.width / 2,
+            canvas.height / 2
+        );
+
+        return;
+
+    }
+
+
+    const max =
+        Math.max(
+            ...values,
+            1
+        );
+
+
+    const min =
+        Math.min(
+            ...values,
+            0
+        );
+
+
+    const width =
+        canvas.width;
+
+    const height =
+        canvas.height;
+
+
+    const padding = 40;
+
+
+    /* Axe */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        padding,
+        padding
+    );
+
+    ctx.lineTo(
+        padding,
+        height - padding
+    );
+
+    ctx.lineTo(
+        width - padding,
+        height - padding
+    );
+
+    ctx.stroke();
+
+
+    /* Courbe */
+
+    ctx.beginPath();
+
+
+    values.forEach(function(value,index){
+
+        const x =
+            padding +
+            (
+                index *
+                (
+                    width -
+                    padding * 2
+                )
+                /
+                Math.max(
+                    values.length - 1,
+                    1
+                )
+            );
+
+
+        const y =
+            height -
+            padding -
+            (
+                (
+                    value - min
+                )
+                /
+                (
+                    max - min || 1
+                )
+            )
+            *
+            (
+                height -
+                padding * 2
+            );
+
+
+        if(index === 0){
+
+            ctx.moveTo(x,y);
+
+        }else{
+
+            ctx.lineTo(x,y);
+
+        }
+
+    });
+
+
+    ctx.stroke();
+
+
+    /* Labels */
+
+    ctx.font =
+        "11px Arial";
+
+    ctx.textAlign =
+        "center";
+
+
+    labels.forEach(function(label,index){
+
+        const x =
+            padding +
+            (
+                index *
+                (
+                    width -
+                    padding * 2
+                )
+                /
+                Math.max(
+                    labels.length - 1,
+                    1
+                )
+            );
+
+
+        ctx.fillText(
+            label,
+            x,
+            height - 15
+        );
+
+    });
+
+}
+
+
+/* LANCER LES GRAPHIQUES */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        updateFinancialCharts();
+
+    }
+);
 </script>
 
 </body>
