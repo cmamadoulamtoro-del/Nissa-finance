@@ -813,6 +813,89 @@ style="display:none;margin-top:20px;">
 </div>
 
 </div>
+<!-- =================================
+     V6 — PRÉPARATION AU FINANCEMENT
+================================= -->
+
+<div class="financial-box financing-box">
+
+<h3>🚀 Préparation au financement</h3>
+
+<p>
+Prépare ton activité avant de rechercher un financement.
+</p>
+
+<label>
+💰 Montant de financement souhaité (MRU)
+</label>
+
+<input
+type="number"
+id="financingAmount"
+placeholder="Ex : 100000"
+min="0"
+>
+
+<label>
+🎯 Pourquoi recherches-tu ce financement ?
+</label>
+
+<select id="financingPurpose">
+
+<option value="">Choisir</option>
+<option>Développer mon activité</option>
+<option>Acheter du stock</option>
+<option>Acheter du matériel</option>
+<option>Augmenter ma production</option>
+<option>Recruter</option>
+<option>Autre</option>
+
+</select>
+
+<button
+type="button"
+class="btn"
+onclick="prepareFinancing()">
+
+🚀 Préparer mon financement
+
+</button>
+
+<div
+id="financingResult"
+style="display:none;margin-top:20px;">
+
+<h4>📊 Analyse de préparation</h4>
+
+<p>
+⭐ Score NISSA :
+<strong id="financingScore">0/100</strong>
+</p>
+
+<p>
+📈 Taux d'épargne :
+<strong id="financingSavingRate">0%</strong>
+</p>
+
+<p>
+💰 Montant demandé :
+<strong id="financingRequested">0 MRU</strong>
+</p>
+
+<p>
+🎯 Motif :
+<strong id="financingPurposeResult"></strong>
+</p>
+
+<p id="financingLevel"></p>
+
+<h4>📋 À préparer</h4>
+
+<ul id="financingChecklist"></ul>
+
+</div>
+
+</div>  
 <!-- HISTORIQUE -->
 
 <div class="financial-box operations">
@@ -2374,6 +2457,217 @@ function generateFinancialReport(){
     document.getElementById(
         "financialReport"
     ).style.display = "block";
+
+  }
+  /* =================================
+   V6 — PRÉPARATION AU FINANCEMENT
+================================= */
+
+function prepareFinancing(){
+
+    const amount =
+        Number(
+            document.getElementById(
+                "financingAmount"
+            ).value
+        ) || 0;
+
+    const purpose =
+        document.getElementById(
+            "financingPurpose"
+        ).value;
+
+
+    if(amount <= 0 || !purpose){
+
+        alert(
+            "Merci d'indiquer le montant souhaité et le motif du financement."
+        );
+
+        return;
+
+    }
+
+
+    /* DONNÉES FINANCIÈRES */
+
+    const operations =
+        JSON.parse(
+            localStorage.getItem(
+                "nissaOperations"
+            )
+        ) || [];
+
+
+    let income = 0;
+    let expense = 0;
+
+
+    operations.forEach(
+        function(operation){
+
+            const value =
+                Number(operation.amount) || 0;
+
+
+            if(operation.type === "income"){
+
+                income += value;
+
+            }else{
+
+                expense += value;
+
+            }
+
+        }
+    );
+
+
+    const balance =
+        income - expense;
+
+
+    let savingRate = 0;
+
+
+    if(income > 0){
+
+        savingRate =
+            (balance / income) * 100;
+
+    }
+
+
+    savingRate =
+        Math.max(
+            0,
+            Math.min(
+                savingRate,
+                100
+            )
+        );
+
+
+    /* SCORE NISSA */
+
+    const scoreElement =
+        document.getElementById(
+            "nissaScore"
+        );
+
+
+    const scoreText =
+        scoreElement
+        ? scoreElement.innerText
+        : "0/100";
+
+
+    const score =
+        parseInt(scoreText) || 0;
+
+
+    /* AFFICHAGE */
+
+    document.getElementById(
+        "financingScore"
+    ).innerText =
+        score + "/100";
+
+
+    document.getElementById(
+        "financingSavingRate"
+    ).innerText =
+        savingRate.toFixed(1) + "%";
+
+
+    document.getElementById(
+        "financingRequested"
+    ).innerText =
+        formatMoney(amount);
+
+
+    document.getElementById(
+        "financingPurposeResult"
+    ).innerText =
+        purpose;
+
+
+    /* NIVEAU DE PRÉPARATION */
+
+    const level =
+        document.getElementById(
+            "financingLevel"
+        );
+
+
+    if(score >= 80 && savingRate >= 20){
+
+        level.innerText =
+            "🟢 Très bonne préparation. Ton profil présente de bonnes bases pour préparer une demande de financement.";
+
+    }else if(score >= 60){
+
+        level.innerText =
+            "🟡 Bonne base. Quelques éléments peuvent encore être renforcés avant une demande de financement.";
+
+    }else{
+
+        level.innerText =
+            "🟠 Préparation à renforcer. Continue à enregistrer tes opérations et à améliorer ton profil financier.";
+
+    }
+
+
+    /* CHECKLIST */
+
+    const checklist =
+        document.getElementById(
+            "financingChecklist"
+        );
+
+
+    checklist.innerHTML = "";
+
+
+    const items = [
+
+        "Profil entrepreneure complet",
+
+        "Historique des revenus et dépenses",
+
+        "Rapport financier NISSA",
+
+        "Objectif de financement clairement défini",
+
+        "Montant de financement justifié",
+
+        "Prévision de l'utilisation du financement"
+
+    ];
+
+
+    items.forEach(
+        function(item){
+
+            const li =
+                document.createElement("li");
+
+            li.innerText =
+                "☑️ " + item;
+
+            checklist.appendChild(li);
+
+        }
+    );
+
+
+    /* AFFICHER LE RÉSULTAT */
+
+    document.getElementById(
+        "financingResult"
+    ).style.display =
+        "block";
 
   }
 </script>
