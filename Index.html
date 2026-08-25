@@ -1140,8 +1140,17 @@ expense
   let currentLang=localStorage.getItem("nissaLanguage")||"fr";
 
 function t(key){
-return (translations[currentLang]&&translations[currentLang][key])
-||translations.fr[key]||key
+
+    const result =
+        (translations[currentLang] && translations[currentLang][key])
+        || translations.fr[key]
+        || key;
+
+    console.log("LANGUE :", currentLang);
+    console.log("CLÉ :", key);
+    console.log("TRADUCTION :", result);
+
+    return result;
 }
 
 function changeLanguage(){
