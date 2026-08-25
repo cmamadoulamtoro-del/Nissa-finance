@@ -839,6 +839,8 @@ return (translations[currentLang]&&translations[currentLang][key])
 
 function changeLanguage(){
 
+alert("Langue sélectionnée : " + document.getElementById("language").value);
+
 currentLang=document.getElementById("language").value;
 
 localStorage.setItem("nissaLanguage",currentLang);
@@ -889,7 +891,7 @@ document.getElementById("city").placeholder=p.city;
 document.getElementById("operationAmount").placeholder=p.amount;
 document.getElementById("operationDescription").placeholder=p.description;
 
-updateAll();
+// updateAll();
 }
 
 function showRegistration(){
